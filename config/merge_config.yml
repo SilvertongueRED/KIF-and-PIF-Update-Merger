@@ -1,0 +1,64 @@
+paths:
+  pif_base: "./PIF_Base_645"      # PIF 6.4.5 (common ancestor)
+  pif_new: "./PIF_New_672"        # PIF 6.7.2 (latest)
+  kif_current: "./KIF_Current"    # Current KIF build
+  output: "./Merged_Output"       # Where merged files go
+
+exclusions:
+  # Files/patterns to always keep KIF version (shiny system, etc.)
+  # These patterns match files changed in KIF v0.20.1 (shiny revamp)
+  - "**/shiny*"
+  - "**/Shiny*"
+  - "**/PokemonShiny*"
+  - "**/pokemon_shiny*"
+  - "**/ShinyRevamp*"
+  - "**/shiny_revamp*"
+  - "**/PokemonShinySystems*"
+  - "**/ShinySystems*"
+  - "**/shiny_systems*"
+  - "**/ShinyCharm*"
+  - "**/shiny_charm*"
+  - "**/ShinySprites*"
+  - "**/shiny_sprites*"
+  - "**/ShinyGraphics*"
+  - "**/Graphics/Battlers/shiny*"
+  - "**/Graphics/Pokemon/shiny*"
+  - "**/Graphics/Shiny*"
+  - "Graphics/Battlers/shiny/**"
+  - "Graphics/Pokemon/shiny/**"
+  # Add more patterns as needed:
+  # - "**/MyCustomFile*"
+
+# Directories to process
+merge_directories:
+  - "Scripts"
+  - "Data"
+  - "PBS"
+  - "Graphics"
+  - "Audio"
+  - "Fonts"
+
+# File extension categories
+text_extensions:
+  - ".rb"
+  - ".txt"
+  - ".ini"
+  - ".csv"
+  - ".rxscript"
+
+binary_extensions:
+  - ".rxdata"
+  - ".png"
+  - ".jpg"
+  - ".jpeg"
+  - ".gif"
+  - ".bmp"
+  - ".ogg"
+  - ".wav"
+  - ".mp3"
+  - ".mid"
+  - ".midi"
+  - ".exe"
+  - ".dll"
+  - ".ttf"
+  - ".otf"
