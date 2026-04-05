@@ -289,11 +289,10 @@ all_paths.each do |rel|
     report.record(relative_path: rel, action: :auto_merged,
                   note: "Clean three-way merge")
   else
-    log_error "CONFLICT  #{rel} (#{merger_result.conflict_count} conflict(s))"
-    conflicts_found = true
-    write_text(out_path, merger_result.content) unless $dry_run
-    report.record(relative_path: rel, action: :conflicted,
-                  note: "#{merger_result.conflict_count} conflict hunk(s) — search for <<<<<<< KIF")
+    log_warn "RESOLVED  #{rel} (#{merger_result.conflict_count} conflict(s)) — PIF 6.7.2 takes priority (auto)"
+    copy_file(pif_path, out_path) unless $dry_run
+    report.record(relative_path: rel, action: :copied_from_pif,
+                  note: "Both sides changed; #{merger_result.conflict_count} conflict(s) — PIF 6.7.2 version used (auto-priority)")
   end
 end
 
