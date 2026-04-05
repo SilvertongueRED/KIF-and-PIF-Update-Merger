@@ -45,18 +45,18 @@ class BinaryHandler
                    note: "KIF modified; PIF unchanged — keeping KIF version")
 
     else
-      # Both changed — conflict
+      # Both changed — PIF 6.7.2 takes priority
       if pif_path && kif_path
-        Decision.new(action: :conflict, source: nil,
-                     note: "Both PIF and KIF modified this binary file — manual review required")
+        Decision.new(action: :take_pif, source: pif_path,
+                     note: "Both PIF and KIF modified this binary file — PIF 6.7.2 takes priority")
       elsif pif_path
-        # KIF deleted it but PIF updated it
-        Decision.new(action: :conflict, source: nil,
-                     note: "PIF updated but KIF deleted — manual review required")
+        # KIF deleted it but PIF updated it — take PIF
+        Decision.new(action: :take_pif, source: pif_path,
+                     note: "PIF updated but KIF deleted — PIF 6.7.2 takes priority")
       elsif kif_path
-        # PIF deleted it but KIF updated it
-        Decision.new(action: :conflict, source: nil,
-                     note: "KIF updated but PIF deleted — manual review required")
+        # PIF deleted it but KIF updated it — keep KIF since no PIF version exists
+        Decision.new(action: :keep_kif, source: kif_path,
+                     note: "KIF updated but PIF deleted — keeping KIF (no PIF version available)")
       else
         Decision.new(action: :delete, source: nil,
                      note: "Both sides deleted this file")

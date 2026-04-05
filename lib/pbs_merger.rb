@@ -76,9 +76,8 @@ class PbsMerger
             output_parts << merge_result.content
             next
           else
-            conflict_count += 1
-            # Insert conflict markers around the whole section body
-            output_parts << conflict_section(key, ours_sec, theirs_sec)
+            # PIF 6.7.2 takes priority on section conflicts
+            output_parts << section_to_text(key, theirs_sec || [])
             next
           end
         end
